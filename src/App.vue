@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
   @import '@/assets/base.css';
   .app-container {
     margin: 0 auto;
@@ -35,18 +35,15 @@
     font-size: 12px;
     text-align: center;
     margin-top: 2rem;
-  }
-
-  nav a.router-link-exact-active {
-    color: var(--color-text);
-  }
-
-  nav a.router-link-exact-active:hover {
-    background-color: transparent;
-  }
-
-  nav a {
-    display: inline-block;
-    padding: 0 1rem;
+    a {
+      display: inline-block;
+      padding: 0 1rem;
+    }
+    a.router-link-exact-active {
+      color: var(--color-text);
+    }
+    a.router-link-exact-active:hover {
+      background-color: transparent;
+    }
   }
 </style>
