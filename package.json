@@ -20,6 +20,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@ls-lint/ls-lint": "^1.11.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.25",
     "@vitejs/plugin-vue": "^2.2.2",

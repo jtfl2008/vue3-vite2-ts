@@ -1,0 +1,11 @@
+ls:
+  src/**:
+    .dir: kebab-case
+    .js: kebab-case
+    .ts: kebab-case
+    .vue: kebab-case
+    .css: kebab-case
+ignore:
+  - node_modules
+  - .git
+  - .husky
