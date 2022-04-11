@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "lint:stylelint": "stylelint --cache --fix {config,src}/**/*.{vue,css,scss,sass,less} --cache --cache-location node_modules/.cache/stylelint/",
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "release": "standard-version --preset gitmoji-config"
   },
   "dependencies": {
     "pinia": "^2.0.11",
@@ -39,6 +40,7 @@
     "postcss-html": "^1.3.0",
     "prettier": "^2.5.1",
     "sass": "^1.49.10",
+    "standard-version": "^9.3.2",
     "stylelint": "^14.6.1",
     "stylelint-config-html": "^1.0.0",
     "stylelint-config-recommended-vue": "^1.4.0",
