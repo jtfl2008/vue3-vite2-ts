@@ -9,6 +9,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
 import AutoImport from 'unplugin-auto-import/vite'
+import legacy from '@vitejs/plugin-legacy'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -32,6 +33,9 @@ export default defineConfig({
       imports: ['vue', 'vue/macros'],
       resolvers: [ElementPlusResolver({ importStyle: false })],
       dts: 'types/auto-imports.d.ts',
+    }),
+    legacy({
+      targets: ['defaults', 'not IE 11'],
     }),
   ],
   resolve: {
