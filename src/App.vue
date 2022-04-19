@@ -9,6 +9,7 @@
         <RouterLink to="/">Home</RouterLink>
         |
         <RouterLink to="/about">About</RouterLink>
+        <el-button>aaaaa</el-button>
       </nav>
     </div>
     <div class="app-body">

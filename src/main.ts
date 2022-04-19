@@ -1,3 +1,4 @@
+import 'vue-global-api'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
