@@ -45,4 +45,26 @@ export default defineConfig({
       '@assets': resolve(__dirname, './src/assets'),
     },
   },
+  server: {
+    host: '0.0.0.0',
+    proxy: {
+      // 选项写法
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
+  build: {
+    terserOptions: {
+      compress: {
+        drop_debugger: true,
+        drop_console: true,
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['vue', 'vue-router'],
+  },
 })
