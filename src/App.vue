@@ -1,5 +1,13 @@
 <script setup lang="ts" name="App">
-  import { RouterLink, RouterView } from 'vue-router'
+  let xx = $ref(2)
+  let xxx = $({
+    aa: 'aa',
+    bb: 'bb',
+  })
+  let double = $computed(() => xx * 2)
+  let onCounter = () => {
+    xx++
+  }
 </script>
 
 <template>
@@ -9,7 +17,8 @@
         <RouterLink to="/">Home</RouterLink>
         |
         <RouterLink to="/about">About</RouterLink>
-        <el-button>aaaaa</el-button>
+        <el-button @click="onCounter">aaaaa</el-button>
+        <span>{{ xx }} {{ double }} {{ xxx.aa }}</span>
       </nav>
     </div>
     <div class="app-body">

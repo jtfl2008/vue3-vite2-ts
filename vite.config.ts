@@ -1,5 +1,6 @@
 import { resolve } from 'path'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
+import type { UserConfig, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
@@ -11,11 +12,14 @@ import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-i
 import AutoImport from 'unplugin-auto-import/vite'
 import legacy from '@vitejs/plugin-legacy'
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   // const env = loadEnv(mode, process.cwd())
-  return {
-    plugins: [
-      vue(),
+  const isProduction = mode === 'production'
+  const plugins: any[] = [
+    [
+      vue({
+        reactivityTransform: true,
+      }),
       vueJsx(),
       vueSetupExtend(),
       PkgConfig(),
@@ -32,14 +36,26 @@ export default defineConfig(({ mode }) => {
         resolves: [ElementPlusResolve()],
       }),
       AutoImport({
-        imports: ['vue', 'vue/macros'],
+        imports: ['vue', 'vue/macros', 'vue-router', 'pinia'],
         resolvers: [ElementPlusResolver({ importStyle: false })],
         dts: 'types/auto-imports.d.ts',
-      }),
-      legacy({
-        targets: ['defaults', 'not IE 11'],
+        eslintrc: {
+          enabled: true,
+          filepath: './.eslintrc-auto-import.json',
+          globalsPropValue: true,
+        },
       }),
     ],
+  ]
+  if (isProduction) {
+    plugins.push(
+      legacy({
+        targets: ['defaults', 'not IE 11'],
+      })
+    )
+  }
+  return {
+    plugins,
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
@@ -59,12 +75,13 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      // terserOptions: {
-      //   compress: {
-      //     drop_debugger: true,
-      //     drop_console: true,
-      //   },
-      // },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_debugger: true,
+          drop_console: true,
+        },
+      },
       rollupOptions: {
         external: [],
         output: {
