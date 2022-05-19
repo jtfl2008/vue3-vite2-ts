@@ -68,7 +68,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       proxy: {
         // 选项写法
         '/api': {
-          target: 'http://localhost:4000',
+          target: 'https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
