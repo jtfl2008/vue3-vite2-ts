@@ -11,6 +11,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
 import AutoImport from 'unplugin-auto-import/vite'
 import legacy from '@vitejs/plugin-legacy'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   // const env = loadEnv(mode, process.cwd())
@@ -26,7 +28,12 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       OptimizationPersist(),
       Components({
         dirs: ['src/components'],
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(),
+          IconsResolver({
+            // enabledCollections: ['ep'],
+          }),
+        ],
         dts: 'types/components.d.ts',
         extensions: ['vue'],
         directoryAsNamespace: false,
@@ -37,13 +44,22 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       }),
       AutoImport({
         imports: ['vue', 'vue/macros', 'vue-router', 'pinia'],
-        resolvers: [ElementPlusResolver({ importStyle: false })],
+        resolvers: [
+          ElementPlusResolver({ importStyle: false }),
+          IconsResolver({
+            // prefix: 'icon',
+          }),
+        ],
         dts: 'types/auto-imports.d.ts',
         eslintrc: {
           enabled: true,
           filepath: './.eslintrc-auto-import.json',
           globalsPropValue: true,
         },
+      }),
+      Icons({
+        compiler: 'vue3',
+        autoInstall: true,
       }),
     ],
   ]
@@ -68,7 +84,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       proxy: {
         // 选项写法
         '/api': {
-          target: 'https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0',
+          target: '',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
