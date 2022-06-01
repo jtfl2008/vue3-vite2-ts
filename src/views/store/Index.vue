@@ -7,7 +7,7 @@
 </template>
 
 <script name="Index" setup lang="ts">
-  import { useCounterStore } from '@/stores/counter'
+  import { useCounterStore } from '@/store/counter'
   let { counter, doubleCount, increment } = $(useCounterStore())
 
   let onChange = () => {
